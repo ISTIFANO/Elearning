@@ -1,19 +1,27 @@
-import React, { useState } from 'react'
-import Logo from '../assets/logoLMS.png'
-import { Link } from 'react-router-dom'
-import lock from '../assets/lock.svg'
-import Hamburger from '../assets/hamburgerMenu.svg'
-import Close from '../assets/close.svg'
-import { motion } from 'framer-motion'
+import React, { useState } from 'react';
+import Logo from '../assets/logoLMS.png';
+import { Link } from 'react-router-dom';
+import lock from '../assets/lock.svg';
+import Hamburger from '../assets/hamburgerMenu.svg';
+import Close from '../assets/close.svg';
+import { motion } from 'framer-motion';
+import OrderPopup from './PopUp'; // Ensure the path to PopUp is correct
 
 const Navbar = () => {
-    // Utilisation de useState pour gérer l'état du menu déroulant
-    const [toggle, setToggle] = useState(false)
+    // State for the dropdown menu
+    const [toggle, setToggle] = useState(false);
+    // State for the popup
+    const [orderPopup, setOrderPopup] = useState(false);
 
-    // Fonction pour basculer l'état du menu déroulant
+    // Toggle function for the dropdown menu
     const handleToggle = () => {
-        setToggle(!toggle)
-    }
+        setToggle(!toggle);
+    };
+
+    // Toggle function for the popup
+    const handleOrderPopup = () => {
+        setOrderPopup(!orderPopup);
+    };
 
     return (
         <div className='w-full h-[96px] bg-white shadow-sm'>
@@ -21,31 +29,30 @@ const Navbar = () => {
                 {/* Logo */}
                 <img src={Logo} alt="logo" className='h-[156px] cursor-pointer' />
                 <div className="flex items-center">
-                    {/* Menu principal sur les écrans larges */}
+                    {/* Main menu for larger screens */}
                     <ul className='hidden md:flex gap-4 '>
-                    <li><Link to="/">Accueil</Link></li>
-                    <li><Link to="/a-propos">À propos</Link></li>
-                    <li><Link to="/support">Support</Link></li>
-                    <li><Link to="/plateforme">Plateforme</Link></li>
-                    <li><Link to="/tarification">Tarification</Link></li>
+                        <li><Link to="/">Accueil</Link></li>
+                        <li><Link to="/a-propos">À propos</Link></li>
+                        <li><Link to="/support">Support</Link></li>
+                        <li><Link to="/plateforme">Plateforme</Link></li>
+                        <li><Link to="/tarification">Tarification</Link></li>
                     </ul>
                 </div>
                 <div className='md:flex hidden'>
-                    {/* Boutons de connexion et d'inscription sur les écrans larges */}
-                    <button className='flex justify-content-between items-center bg-transparent px-6 gap-2'>
+                    {/* Login and Signup buttons for larger screens */}
+                    <button className='flex justify-content-between items-center bg-transparent px-6 gap-2' onClick={handleOrderPopup}>
                         <img src={lock} alt='lock' />
-                        <Link to="/Login">Connexion</Link>
-                        
+                        Connexion
                     </button>
-                    <button  className='px-8 py-3 bg-[#219ebc]'><Link to="/SignUp">Inscription gratuite</Link></button>
+                    <button className='px-8 py-3 bg-[#219ebc]'><Link to="/SignUp">Inscription gratuite</Link></button>
                 </div>
-                {/* Bouton de menu déroulant pour les écrans mobiles */}
+                {/* Hamburger menu for mobile screens */}
                 <motion.div whileTap={{ scale: 0.6 }} className="md:hidden cursor-pointer" onClick={handleToggle}>
                     <img src={toggle ? Close : Hamburger} alt="hamburger" />
                 </motion.div>
             </div>
             <div>
-                {/* Menu déroulant sur les écrans mobiles */}
+                {/* Dropdown menu for mobile screens */}
                 <motion.ul
                     initial={{ opacity: 0, x: 200 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -57,17 +64,19 @@ const Navbar = () => {
                     <li className='p-4 hover:bg-gray-50'>Plateforme</li>
                     <li className='p-4 hover:bg-gray-50'>Tarification</li>
                     <div className='flex flex-col my-4 gap-4'>
-                        {/* Boutons de connexion et d'inscription dans le menu déroulant */}
-                        <button className='flex border border-[240136] justify-center items-center bg-transparent px-6 gap-2 py-4'>
+                        {/* Login and Signup buttons in the dropdown menu */}
+                        <button className='flex border border-[240136] justify-center items-center bg-transparent px-6 gap-2 py-4' onClick={handleOrderPopup}>
                             <img src={lock} alt='lock' />
                             Connexion
                         </button>
-                        <button className='px-8 py-5 bg-[#219ebc]'>Inscription gratuite</button>
+                    <Link to="/SignUp" ><button className='px-8 py-5 bg-[#219ebc]'>Inscription gratuite</button></Link>   
                     </div>
                 </motion.ul>
             </div>
+            {/* Render the OrderPopup component */}
+            <OrderPopup orderPopup={orderPopup} setOrderPopup={setOrderPopup} />
         </div>
-    )
-}
+    );
+};
 
-export default Navbar
+export default Navbar;

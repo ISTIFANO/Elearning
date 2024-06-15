@@ -7,7 +7,10 @@ import Categories from "./Categories";
 import FeedBack from "./FeedBack";
 import CTA from "./CTA";
 import Footer from "./Footer";
+import Dashboard from "./Dashboard";
 import Home_components from "./Home_components";
 import  SignUp  from './SignUp';
 import  Login  from './Login';
-export {Navbar,Login,HeroSection,SignUp,Home_components,Companies,Courses,Achievement,Categories,FeedBack,CTA,Footer }
+import Cours from "./Cours";
+import ReadCources from "./ReadCources";
+export {Navbar,Login,HeroSection,SignUp,Dashboard,ReadCources,Home_components,Cours,Companies,Courses,Achievement,Categories,FeedBack,CTA,Footer }
