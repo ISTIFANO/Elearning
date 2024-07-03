@@ -13,7 +13,7 @@ This repository contains a responsive landing page template built using React, T
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/FREDVUNI/tailwind-react-landing.git
+   git clone https://github.com/ISTIFANO/Elearning.git
    ```
 
 2. Navigate into the project directory:
@@ -64,6 +64,6 @@ Contributions are welcome! Please fork the repository, make changes, and create 
 
 # screenshot
 
-![image](https://github.com/FREDVUNI/tailwind-react-landing/assets/41730664/1ca496a4-0406-4bcf-9f60-3e076425d8a3)
+
 
 # Elearning
