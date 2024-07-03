@@ -1,6 +1,6 @@
 import React from 'react'
 import header from '../assets/header.jpg'; // Importing header image
-import { FaSearch } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   return (
@@ -11,7 +11,7 @@ const HeroSection = () => {
           <h1 className="text-3xl text-blue-50 font-extrabold mb-12 sm:text-4xl">
             DÉVELOPPEZ GRATUITEMENT VOS COMPÉTENCES EN LIGNE
           </h1>
-          <div className="relative max-w-2xl w-full mx-auto bg-white flex items-center">
+          {/* <div className="relative max-w-2xl w-full mx-auto bg-white flex items-center">
             <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input 
               type="text" 
@@ -21,13 +21,17 @@ const HeroSection = () => {
             <button className="bg-blue-500 text-white px-4 py-2 hover:bg-blue-600 absolute right-0 top-0 bottom-0">
               Rechercher
             </button>
-          </div>
+          </div> */}
           <div className="mt-4">
             <span className="mx-2 text-blue-50 text-lg md:text-2xl transition hover:text-blue-950">Ou laissez nous</span>
             <a href="#" className="text-blue-50 text-lg md:text-2xl transition hover:text-green-300 underline">vous guider</a>
           </div>
           <div className="mt-8">
-            <button className="bg-blue-400 text-white px-8 py-3 rounded hover:bg-blue-500 focus:outline-none focus:ring active:bg-blue-950 md:px-12 md:mt-20">REJOINDRE LA COMMUNAUTÉ</button>
+          <Link to="/Cours" className="block">
+  <button className="bg-blue-400 text-white px-8 py-3 rounded hover:bg-blue-500 focus:outline-none focus:ring active:bg-blue-950 md:px-12 md:mt-20">
+    REJOINDRE LA COMMUNAUTÉ
+  </button>
+</Link>
           </div>
         </div>
       </section>

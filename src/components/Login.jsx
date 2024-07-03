@@ -31,14 +31,15 @@ function Login() {
         formDataToSend.append("password", password);
 
         setLoading(true);
- console.log(formData);
+        console.log(formData);
         try {
             const response = await fetch('http://localhost/Backend/Cources/LMS_3/Elearning/src/php/Authentication/Authenticate2.php', {
                 method: 'POST',
-                body: formDataToSend,
+                body: JSON.stringify({ email, password }),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
             });
-
-           
 
             const responseData = await response.json();
 
@@ -48,7 +49,9 @@ function Login() {
                     navigate('/Cours');
                 } else if (responseData.userType === 'teacher') {
                     navigate('/Dashboard_Enseignant');
-                }
+                }else if (responseData.userType === 'admin') {
+                  navigate('/Dashboard_Admin');
+              }
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -78,10 +81,10 @@ function Login() {
     <section className="relative flex flex-wrap lg:h-screen lg:items-center">
       <div className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
         <div className="mx-auto max-w-lg text-center">
-          <h1 className="text-2xl font-bold sm:text-3xl">Get started today!</h1>
+          <h1 className="text-2xl font-bold sm:text-3xl">Bienvenue sur Manhaj!</h1>
           <p className="mt-4 text-gray-500">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero nulla eaque error neque
-            ipsa culpa autem, at itaque nostrum!
+          Commencez votre voyage éducatif dès aujourd'hui avec Manhaj. Connectez-vous pour accéder à une vaste gamme de cours, modules interactifs et ressources
+           pédagogiques. Rejoignez notre communauté d'apprenants et d'enseignants dévoués.
           </p>
         </div>
         <form onSubmit={handleSubmit} className="mx-auto mb-0 mt-8 max-w-md space-y-4">

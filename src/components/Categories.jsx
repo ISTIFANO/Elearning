@@ -1,30 +1,28 @@
-import React from 'react'
-import CategoryCard from './CategoryCard'
-import {BsVectorPen,BsBank,BsMusicNote} from 'react-icons/bs'
-import { TiHtml5,TiMicrophone,TiBriefcase,TiBatteryCharge,TiCamera} from 'react-icons/ti'
+import { Link } from 'react-router-dom';
+import man1 from '../assets/man1.png';
+import man2 from '../assets/man2.png';
+import man3 from '../assets/man3.png';
 
-const Categories = () => {
+export default function Categories() {
   return (
-    <section className='w-full bg-[#F0F8F7] p-5'>
-        <div className='md:max-w-[1100px] m-auto max-w-[400px]'>
-            <h1 className='md:leading-[72px] text-3x1 font-bold'>Our <span className='text-[#208486]'>Popular Categories</span></h1>
-            <p className="text-lg text-gray-600">
-                Various versions have evolved over the years
-            </p>
-            <div className='grid md:grid-cols-3 py-12 gap-4'>
-                <CategoryCard icon={<BsVectorPen size={30}/>} title={'Design'}/>
-                <CategoryCard icon={<TiHtml5 size={30}/>} title={'Web Development'}/>
-                <CategoryCard icon={<TiMicrophone size={30}/>} title={'Marketing'}/>
-                <CategoryCard icon={<TiBriefcase size={30}/>} title={'Business'}/>
-                <CategoryCard icon={<TiBatteryCharge size={30}/>} title={'Lifestyle'}/>
-                <CategoryCard icon={<TiCamera size={30}/>} title={'Photograph'}/>
-                <CategoryCard icon={<BsMusicNote size={30}/>} title={'Music'}/>
-                <CategoryCard icon={<BsBank size={30}/>} title={'Finance'}/>
-                <CategoryCard icon={<BsMusicNote size={30}/>} title={'Health & Fitness'}/>
-            </div>
+    <div className="bg-background text-foreground h-96 p-6 md:p-12">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
+        <div className="relative flex-shrink-0">
+          <img className="w-32 h-32 md:w-48 md:h-48 rounded-full border-4 border-white shadow-lg" src={man1} alt="Main fundraiser image" />
+          <div className="absolute top-0 left-0 transform -translate-x-1/4 -translate-y-1/4 w-16 h-16 md:w-24 md:h-24 rounded-full border-4 border-white shadow-lg">
+            <img className="w-full h-full rounded-full" src={man3} alt="Supporting image 1" />
+          </div>
+          <div className="absolute bottom-0 right-0 transform translate-x-1/4 translate-y-1/4 w-16 h-16 md:w-24 md:h-24 rounded-full border-4 border-white shadow-lg">
+            <img className="w-full h-full rounded-full" src={man2} alt="Supporting image 2" />
+          </div>
         </div>
-    </section>
-  )
-}
+        <div className="mt-6 md:mt-0 md:ml-64 text-center md:text-left">
+          <h2 className="text-2xl md:text-4xl font-bold">Manhaj: La plateforme éducative pour les étudiants du Maroc</h2>
+          <p className="mt-4 text-lg md:text-xl">Manhaj est une plateforme marocaine dédiée à l'éducation des étudiants à travers le pays. Notre mission est de fournir un accès équitable à l'éducation de qualité, en aidant les étudiants à développer leurs compétences académiques et professionnelles.</p>
 
-export default Categories
+          <Link to="/signup" className="mt-4 inline-block text-primary hover:underline">En savoir plus et rejoindre Manhaj</Link>
+        </div>
+      </div>
+    </div>
+  );
+}

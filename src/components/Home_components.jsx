@@ -1,5 +1,5 @@
 import React from 'react'
-import { HeroSection,Navbar,Courses, Achievement,Companies,Categories,FeedBack,CTA,Footer } from './index'
+import { HeroSection,Navbar,Courses, Achievement,Companies,Categories,CTA,Footer } from './index'
 
 
 function Home_components() {
@@ -13,7 +13,6 @@ function Home_components() {
         <Courses/>
         <Achievement/>
         <Categories/>
-        <FeedBack/>
         <CTA/>
         <Footer/>
     </div>

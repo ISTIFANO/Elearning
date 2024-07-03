@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
 
 const OrderPopup = ({ orderPopup, setOrderPopup }) => {
-  const clientId = "433164282464-hlp597o0pe9hvgqsiognj6gn75omn168.apps.googleusercontent.com";
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -22,21 +20,25 @@ const OrderPopup = ({ orderPopup, setOrderPopup }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost/Backend/Cources/LMS_3/Elearning/src/php/Authenticate.php", formData);
+      const response = await axios.post("http://localhost/Backend/Cources/LMS_3/Elearning/src/php/Authentication/Authenticate2.php", formData);
       if (response.data.status === "success") {
-        // Handle success
-        Swal.fire({
-          icon: 'success',
-          title: 'Login Success',
-          text: 'You have been successfully logged in!',
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'OK'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            // Close the popup
-            setOrderPopup(false);
-          }
-        });
+        // Determine user type
+        const userType = response.data.userType;
+
+        // Handle success based on user type
+        if (userType === "admin") {
+          // Redirect to admin dashboard (replace with your admin dashboard route)
+          window.location.href = "/Dashboard_Admin";
+        } else if (userType === "student") {
+          // Redirect to student page (replace with your student dashboard route)
+          window.location.href = "/Cours";
+        } else if (userType === "teacher") {
+          // Redirect to teacher page (replace with your teacher dashboard route)
+          window.location.href = "/Dashboard_Enseignant";
+        }
+
+        // Optionally, close the popup after successful login
+        setOrderPopup(false);
       } else {
         // Handle error
         console.error('Failed to login');
@@ -49,56 +51,6 @@ const OrderPopup = ({ orderPopup, setOrderPopup }) => {
     } catch (error) {
       console.error('Error:', error);
     }
-  };
-
-  // Google sign-in success callback
-  const onSuccess = async (res) => {
-    const token = res.credential;
-    const decodedToken = jwtDecode(token);
-
-    const name = decodedToken.given_name;
-    const email = decodedToken.email;
-
-    const formDataGoogle = {
-      name: name,
-      email: email,
-      address: '' // No need to set address for Google sign-in
-    };
-  
-
-    try {
-      const response = await axios.post("http://localhost/Backend/Cources/LMS_3/Elearning/src/php/Authenticate.php", formDataGoogle);
-      if (response.data.status === "success") {
-        // Handle success
-        Swal.fire({
-          icon: 'success',
-          title: 'Login Success',
-          text: 'You have been successfully logged in!',
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'OK'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            // Close the popup
-            setOrderPopup(false);
-          }
-        });
-      } else {
-        // Handle error
-        console.error('Failed to login');
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Failed to login. Please try again.'
-        });
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
-
-  // Google sign-in failure callback
-  const onFailure = (res) => {
-    console.log("Login Failed ", res);
   };
 
   return (
@@ -145,26 +97,6 @@ const OrderPopup = ({ orderPopup, setOrderPopup }) => {
                 >
                   Login Now
                 </button>
-              </div>
-              <div className="flex justify-center mt-4">
-                <GoogleLogin
-                  clientId={clientId}
-                  buttonText="Login with Google"
-                  onSuccess={onSuccess}
-                  onFailure={onFailure}
-                  cookiePolicy={"single_host_origin"}
-                  isSignedIn={true}
-                  name="googleLogin"
-                  render={(renderProps) => (
-                    <button
-                      onClick={renderProps.onClick}
-                      disabled={renderProps.disabled}
-                      className="bg-red-600 hover:bg-red-700 text-white py-1 px-4 rounded-full"
-                    >
-                      Login with Google
-                    </button>
-                  )}
-                />
               </div>
             </div>
           </div>

@@ -126,11 +126,10 @@ function SignUp() {
                 </span>
               </a>
               <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-                Welcome to Manhaj
+              Manhaj : Votre guide vers l'excellence académique
               </h2>
               <p className="mt-4 leading-relaxed text-white/90">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam,
-                quibusdam aperiam voluptatum.
+              Manhaj représente bien plus qu'une simple plateforme d'e-learning.
               </p>
             </div>
           </section>
@@ -153,12 +152,10 @@ function SignUp() {
                 </a>
 
                 <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-                  Welcome to Squid 🦑
-                </h1>
+                Manhaj : Votre guide vers l'excellence académique                </h1>
 
                 <p className="mt-4 leading-relaxed text-gray-500">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam,
-                  quibusdam aperiam voluptatum.
+                Manhaj représente bien plus qu'une simple plateforme d'e-learning.
                 </p>
               </div>
 
@@ -173,7 +170,7 @@ function SignUp() {
                     name="Nom"
                     value={formData.Nom}
                     onChange={handleChange}
-                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                    className="mt-1 w-full rounded-md p-2 bg-white text-sm border border-zinc-300 text-gray-700 shadow-sm"
                   />
                 </div>
 
@@ -187,31 +184,31 @@ function SignUp() {
                     name="Prénom"
                     value={formData.Prénom}
                     onChange={handleChange}
-                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                    className="mt-1 w-full rounded-md border p-2 border-zinc-300 bg-white text-sm text-gray-700 shadow-sm"
                   />
                 </div>
 
                 <div className="col-span-6">
-                  <label htmlFor="Email" className="block text-sm font-medium text-gray-700"> Email </label>
+                  <label htmlFor="Email" className="block border  text-sm font-medium text-gray-700"> Email </label>
                   <input
                     type="email"
                     id="Email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                    className="mt-1 w-full rounded-md border p-2 border-zinc-300 bg-white text-sm text-gray-700 shadow-sm"
                   />
                 </div>
 
                 <div className="col-span-6 sm:col-span-3">
-                  <label htmlFor="Password" className="block text-sm font-medium text-gray-700"> Password </label>
+                  <label htmlFor="Password" className="block text-sm font-medium border "> Password </label>
                   <input
                     type="password"
                     id="Password"
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
-                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                    className="mt-1 w-full rounded-md border p-2 border-zinc-300 bg-white text-sm text-gray-700 shadow-sm"
                   />
                 </div>
 
@@ -239,12 +236,13 @@ function SignUp() {
                       )}
                     />
                   </div>
-                  <p className="mt-4 text-sm text-gray-500 sm:mt-0">
+                
+                </div>
+              </form>
+              <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                     Vous avez déjà un compte?
                     <Link className="text-gray-700 underline" to="/Login">Connectez-vous</Link>
                   </p>
-                </div>
-              </form>
             </div>
           </main>
         </div>

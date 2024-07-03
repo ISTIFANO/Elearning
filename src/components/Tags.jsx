@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import axios from 'axios';
 
 const Tags = () => {
+    
     const { tag } = useParams(); // Using useParams to get the tag from the URL
     console.log(tag);
     const [courses, setCourses] = useState([]);
@@ -33,7 +34,7 @@ const Tags = () => {
     return (
         <>
             <Navbar />
-            <div className="container mx-auto p-4">
+            <div className="container w-screenmx-auto p-4">
                 <div className="flex flex-col md:flex-row items-center md:items-start">
                     <div className="md:w-2/3">
                         {error && <p>{error}</p>} {/* Affiche l'erreur s'il y en a une */}
@@ -51,6 +52,12 @@ const Tags = () => {
                                     <p className="text-zinc-500 mt-1">{course.Durée} total hours • {course.Nombre_lectures} lectures • {course.Niveau_scolaire}</p>
                                     <p className="text-lg font-bold mt-2">{course.price}</p>
                                     {course.Bestseller && <span className="inline-block bg-yellow-200 text-yellow-800 text-xs px-2 py-1 rounded mt-1">Bestseller</span>}
+                                    <button
+                                    className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+                                    onClick={() => window.location.href = `/ReadCources/${course.ID_Cours}`}
+                                >
+                                    Regarder
+                                </button>
                                 </div>
                             ))}
                         </div>

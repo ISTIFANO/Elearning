@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import { useParams } from 'react-router-dom';
 
 const Enseignant = () => {
+    
     const { id } = useParams();
     const [enseignantData, setEnseignantData] = useState(null);
     const [courses, setCourses] = useState([]);
@@ -73,6 +74,12 @@ const Enseignant = () => {
                             <p className="text-zinc-500 mt-1">{course.langue}</p>
                             <p className="text-lg font-bold mt-2">{course.price}</p>
                             <p className="text-zinc-500 mt-1">{course.tag}</p>
+                            <button
+                                    className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+                                    onClick={() => window.location.href = `/ReadCources/${course.ID_Cours}`}
+                                >
+                                    Regarder
+                                </button>
                         </div>
                     ))}
                 </div>

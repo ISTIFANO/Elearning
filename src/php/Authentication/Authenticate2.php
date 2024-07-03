@@ -14,15 +14,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 // Get POST data from JSON payload
 $data = json_decode(file_get_contents('php://input'), true);
 
-$email = $data['email'] ;
-$password = $data['password'] ;
-
+$email = $data['email'];
+$password = $data['password'];
 
 // Validate input data
 if (!$email || !$password) {
     http_response_code(400);
     echo json_encode(["status" => "error", "message" => "Email or password not provided"]);
     exit();
+}
+
+// Check for admin credentials
+function checkAdminLogin($email, $password) {
+    $adminEmail = "Elamiri.Aamir@Admin.com";
+    $adminPassword = "12115215";
+
+    if ($email === $adminEmail && $password === $adminPassword) {
+        return true;
+    }
+    return false;
 }
 
 // Function to check student login credentials
@@ -43,7 +53,7 @@ function checkStudentLogin($email, $password) {
         $email = $conn->real_escape_string($email);
 
         // Prepare and execute query to check student credentials
-        $query = "SELECT ID_Etudiant, password, email FROM etudiant WHERE email = '$email' ";
+        $query = "SELECT ID_Etudiant, password, email FROM etudiant WHERE email = '$email'";
         $result = $conn->query($query);
 
         // Verify password if user found
@@ -51,17 +61,9 @@ function checkStudentLogin($email, $password) {
             $row = $result->fetch_assoc();
             $stored_password = $row['password'];
 
-          echo  $stored_password ;
-          
-            // if (password_verify($password, $stored_password)) {
-
-               
+            if ($stored_password == $password) {
                 return $row['ID_Etudiant'];
-                if( $stored_password==$password){
-             echo   $row['ID_Etudiant'];
-                }
-                
-            // }
+            }
         }
         return false;
     } catch (Exception $e) {
@@ -87,7 +89,7 @@ function checkTeacherLogin($email, $password) {
         $email = $conn->real_escape_string($email);
 
         // Prepare and execute query to check teacher credentials
-        $query = "SELECT ID_Enseignant, password,Adresse_électronique FROM enseignant WHERE Adresse_électronique = '$email'";
+        $query = "SELECT ID_Enseignant, password, Adresse_électronique FROM enseignant WHERE Adresse_électronique = '$email'";
         $result = $conn->query($query);
 
         // Verify password if user found
@@ -95,21 +97,22 @@ function checkTeacherLogin($email, $password) {
             $row = $result->fetch_assoc();
             $stored_password = $row['password'];
 
-            // if (password_verify($password, $stored_password)) {
-
-            if( $stored_password==$password){
-
-                return $row['ID_Enseignant'];}
+            if ($stored_password == $password) {
+                return $row['ID_Enseignant'];
             }
-        // }
+        }
         return false;
     } catch (Exception $e) {
         return false;
     }
 }
 
-// Function to authenticate user (student or teacher)
+// Function to authenticate user (student, teacher, or admin)
 function authenticateUser($email, $password) {
+    if (checkAdminLogin($email, $password)) {
+        return ["status" => "success", "message" => "Login successful", "userId" => 1, "userType" => "admin"];
+    }
+
     $studentID = checkStudentLogin($email, $password);
     if ($studentID !== false) {
         return ["status" => "success", "message" => "Login successful", "userId" => $studentID, "userType" => "student"];

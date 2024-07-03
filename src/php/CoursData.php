@@ -11,11 +11,24 @@ if (!$connexion) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+$input = json_decode(file_get_contents("php://input"), true);
+$titleOrDescription = isset($input['titleOrDescription']) ? mysqli_real_escape_string($connexion, $input['titleOrDescription']) : '';
+$tag = isset($input['tag']) ? mysqli_real_escape_string($connexion, $input['tag']) : '';
+
 $req = "
     SELECT cours.*, enseignant.nom AS Nom_Enseignant 
     FROM cours 
     JOIN enseignant ON cours.ID_Enseignant = enseignant.ID_Enseignant
+    WHERE 1
 ";
+
+if (!empty($titleOrDescription)) {
+    $req .= " AND (cours.Nom_du_cours LIKE '%$titleOrDescription%' OR cours.Description LIKE '%$titleOrDescription%')";
+}
+
+if (!empty($tag)) {
+    $req .= " AND cours.tag LIKE '%$tag%'";
+}
 
 $result = mysqli_query($connexion, $req);
 
@@ -30,5 +43,4 @@ if ($result) {
 }
 
 mysqli_close($connexion);
-
 ?>

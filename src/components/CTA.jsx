@@ -1,5 +1,7 @@
 import React from 'react'
 import cta from '../assets/cta.png'
+import { Link } from 'react-router-dom';
+
 
 const CTA = () => {
   return (
@@ -18,7 +20,11 @@ const CTA = () => {
                     {/* Description */}
                     <p className='py-2 text-lg text-gray-900'>Diverses versions ont évolué au fil des ans</p>
                     {/* Bouton d'inscription */}
-                    <button className='max-[780px]:w-full px-8 text-white py-3 bg-[#208446]'>Inscrivez-vous gratuitement</button>
+                    <Link to="/Cours" className="block max-w-[780px] w-full mx-auto">
+  <button className="w-full px-8 py-3 text-white bg-[#208446]">
+    En savoir plus et rejoindre Manhaj
+  </button>
+</Link>
                 </div>
             </div>
         </div>
